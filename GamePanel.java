@@ -25,6 +25,8 @@ public class GamePanel extends JPanel implements ActionListener {
     int snakeSize1 = 3;
     int snakeSize2 = 3;
     int applesEaten;
+    int apples1;
+    int apples2;
     int appleX;
     int appleY;
     char direction1 = 'R'; //snake 1 starting direction. 
@@ -103,7 +105,7 @@ public class GamePanel extends JPanel implements ActionListener {
             y1[i] = y1[i-1];
         }
 
-        for (int i = UNIT_SIZE + snakeSize2; i > UNIT_SIZE; i--) {
+        for (int i = snakeSize2; i > 0; i--) {
             x2[i] = x2[i-1];
             y2[i] = y2[i-1];
         }
@@ -149,6 +151,13 @@ public class GamePanel extends JPanel implements ActionListener {
         if ((x1[0] == appleX) && (y1[0] == appleY)) {
             snakeSize1 ++;
             applesEaten ++;
+            apples1 ++;
+            newApple();
+        }
+        else if ((x2[0] == appleX) && (y2[0] == appleY)) {
+            snakeSize2 ++;
+            applesEaten ++;
+            apples2 ++;
             newApple();
         }
     }
@@ -159,8 +168,10 @@ public class GamePanel extends JPanel implements ActionListener {
             if ((x1[0] == x1[i]) && (y1[0] == y1[i])) {
                 running = false;
             }
+        }
+        for (int i = snakeSize2; i > 0; i--) {
             //self collision snake 2
-            else if ((x2[0] == x2[i]) && (y2[0] == y2[i])) {
+            if ((x2[0] == x2[i]) && (y2[0] == y2[i])) {
                 running = false;
             }
             
