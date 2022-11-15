@@ -11,8 +11,8 @@ import java.util.Random;
 public class GamePanel extends JPanel implements ActionListener {
     
     //screen width and length
-    static final int SCREEN_WIDTH = 600;
-    static final int SCREEN_HEIGHT = 600;
+    static final int SCREEN_WIDTH = 900;
+    static final int SCREEN_HEIGHT = 900;
     static final int UNIT_SIZE = 25; //determines size of grid spaces
     static final int GAME_UNITS = (SCREEN_HEIGHT*SCREEN_WIDTH) / UNIT_SIZE;
     static final int DELAY = 75;
@@ -22,8 +22,8 @@ public class GamePanel extends JPanel implements ActionListener {
     //snake 2
     final int x2[] = new int[GAME_UNITS];
     final int y2[] = new int[GAME_UNITS];
-    int snakeSize1 = 3;
-    int snakeSize2 = 3;
+    int snakeSize1 = 9;
+    int snakeSize2 = 9;
     int applesEaten;
     int apples1;
     int apples2;
@@ -168,10 +168,24 @@ public class GamePanel extends JPanel implements ActionListener {
             if ((x1[0] == x1[i]) && (y1[0] == y1[i])) {
                 running = false;
             }
+            //snake 2 collides with snake 1
+            if ((x2[0] == x1[i]) && (y2[0] == y1[i])) {
+                running = false;
+            }
+            else if ((x2[0] == x1[0]) && (y2[0] == y1[0])) {
+                running = false;
+            }
         }
         for (int i = snakeSize2; i > 0; i--) {
             //self collision snake 2
             if ((x2[0] == x2[i]) && (y2[0] == y2[i])) {
+                running = false;
+            }
+            //snake 1 collides with snake 2
+            if ((x1[0] == x2[i]) && (y1[0] == y2[i])) {
+                running = false;
+            }
+            else if ((x1[0] == x2[0]) && (y1[0] == y2[0])) {
                 running = false;
             }
             
